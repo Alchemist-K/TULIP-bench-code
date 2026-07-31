@@ -14,32 +14,6 @@ Each script has a configuration block or argument defaults at the top; set the
 dataset paths there. Subjects are keyed `Neurips_Sub{n}` (observational) and
 `Neurips_DBS_Sub{n}` (DBS) throughout.
 
-## Which script reproduces which result
-
-| Paper result | Script | Reads |
-| --- | --- | --- |
-| Table 2, gait MPJPE / PA-MPJPE | `pose_eval/eval_gait.py` | released gait pose pickles |
-| Table 2, fist MPJPE / PA-MPJPE | `pose_eval/eval_fist.py` | released fist pose pickles |
-| Table 2, gait feature error (ST %, kinematic %) | `feature_eval/eval_public_gait.py` | `feature_eval/feature_csvs/gait/` |
-| Table 2, fist feature error (ST %, kinematic %) | `feature_eval/eval_public_fist.py` | `feature_eval/feature_csvs/fist/` |
-| Table 4, monocular pose sources | `task2/run_monocular_hand.py` | released videos + pose pickles |
-| UPDRS prediction (Task 1) | `updrs/train_feature_models.py` | extracted feature tables |
-| Task 3 cohort-to-DBS transfer | `task3/ssl_cohort_bridge.py` | released DBS stride poses |
-
-Selected Table 2 features: gait uses `stride_length` (ST) and `arm2arm_ROM`
-(kinematic); fist uses `speed_fingertip_mean` (ST) and `amp_mcp_range_rad_mean`
-(kinematic).
-
-## Two evaluation halves
-
-- **Pose metrics (MPJPE, PA-MPJPE)** run directly against the released pose
-  pickles. No extra files needed.
-- **Feature error (ST %, kinematic %)** is computed from precomputed feature
-  CSVs included under `feature_eval/feature_csvs/`, so the reported numbers can
-  be regenerated without the third-party estimators. Error is computed per unit
-  (stride for gait, window for fist) within subject, then averaged across
-  subjects.
-
 ## Layout
 
 ```
